@@ -12,10 +12,13 @@ apk add git \
     openssl-dev \
     libffi-dev \
     perl \
-    perl-net-ssleay && \
+    perl-net-ssleay \
+    go && \
 git clone https://github.com/sqlmapproject/sqlmap /root/sqlmap && \
 git clone https://github.com/maurosoria/dirsearch /root/dirsearch && \
 git clone https://github.com/sullo/nikto /root/nikto && \
 pip install -r /root/dirsearch/requirements.txt && \
-pip install xmltodict
+pip install xmltodict && \
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest && \
+/root/go/bin/nuclei
 COPY xml2json.py /root/

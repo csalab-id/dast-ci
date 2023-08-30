@@ -21,14 +21,13 @@ pipeline {
         stage('Nuclei') {
             agent {
                 docker {
-                    image 'projectdiscovery/nuclei:latest'
-                    args '--entrypoint=""'
+                    image 'csalab/dast-ci:latest'
                 }
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'nuclei -u ${URL_TARGET} -nc -je nuclei.json'
-                    sh 'nuclei -u ${URL_TARGET} -nc -as -je nuclei-as.json'
+                    sh '/root/go/bin/nuclei -u ${URL_TARGET} -nc -je nuclei.json'
+                    sh '/root/go/bin/nuclei -u ${URL_TARGET} -nc -as -je nuclei-as.json'
                 }
             }
             post {
